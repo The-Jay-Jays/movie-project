@@ -3,7 +3,7 @@ let domMovieBuilder = movieArr => {
     main.empty();
     movieArr.forEach(movie => {
         main.append(`
-        <div class="card">
+        <div class="card" data-attribute="${movie.id}">
           <img class="card-img-top" src="${movie.image}" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">${movie.title}</h5>
