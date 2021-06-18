@@ -41,23 +41,39 @@ $(document).ready(() => {
             image: "",
             year: ""
         }
-        fetch("https://stupendous-extreme-slug.glitch.me/movies",{
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(addMovie)
-        })
-            .then(res => res.json()).then(data => {
-            console.log(data);
-            initMovies = [];
-            movieAPICall();
+        if ($("#Title").val()) {
+            $("#add-movie").toggleClass("disabled");
+            fetch("https://stupendous-extreme-slug.glitch.me/movies",{
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(addMovie)
+            })
+                .then(res => res.json()).then(data => {
+                console.log(data);
+                initMovies = [];
+                setTimeout(function (){
+                    movieAPICall();
+                    $("#add-movie").toggleClass("disabled");
+                }, 1000);
 
-        }).catch(err => {
-            console.log(`There was an API error of the following: ${err}`);
-            alert(`Sorry, there was an error adding movie data.  Please try again later.`)
-        });
+
+            }).catch(err => {
+                console.log(`There was an API error of the following: ${err}`);
+                alert(`Sorry, there was an error adding movie data.  Please try again later.`)
+            });
+        } else {
+            alert("The title field is empty.  Please enter a title to create a movie");
+        }
+
     });
+
+    console.log(initMovies);
+    initMovies.sort((curr, next) => {
+        return curr.title > next.title ? 1 : -1
+    })
+    console.log(initMovies);
 
 });
 
