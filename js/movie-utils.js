@@ -1,11 +1,10 @@
+let initMovies = [];
 let movieAPICall = () => {
     fetch("https://stupendous-extreme-slug.glitch.me/movies")
         .then(res => res.json()).then(data => {
-        console.log(data);
-        let movies = [];
+        // console.log(data);
         data.forEach((movie, index) => {
-            console.log(data[0].actors);
-            movies.push({
+            initMovies.push({
                 actors: data[index].actors,
                 director: data[index].director,
                 genre: data[index].genre,
@@ -17,14 +16,16 @@ let movieAPICall = () => {
                 year: data[index].year
             });
         })
-        domMovieBuilder(movies);
+        domMovieBuilder(initMovies);
     }).catch(err => {
         console.log(`There was an API error of the following: ${err}`);
         alert(`Sorry, there was an error retrieving movie data.  Please try again later.`)
     });
+
 }
 
 $(document).ready(() => {
+
     movieAPICall();
 
     $("#add-movie").click(function () {
@@ -32,7 +33,13 @@ $(document).ready(() => {
         let rating = $("#Rating").val();
         let addMovie = {
             title: title,
-            rating: rating
+            rating: rating,
+            actors: "",
+            director: "",
+            genre: "",
+            plot: "",
+            image: "",
+            year: ""
         }
         fetch("https://stupendous-extreme-slug.glitch.me/movies",{
             method: "POST",
@@ -43,12 +50,15 @@ $(document).ready(() => {
         })
             .then(res => res.json()).then(data => {
             console.log(data);
+            initMovies = [];
+            movieAPICall();
 
         }).catch(err => {
             console.log(`There was an API error of the following: ${err}`);
-            alert(`Sorry, there was an error retrieving movie data.  Please try again later.`)
+            alert(`Sorry, there was an error adding movie data.  Please try again later.`)
         });
-    })
+    });
+
 });
 
 
