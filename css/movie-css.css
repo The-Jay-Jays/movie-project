@@ -6,6 +6,7 @@ a {
 body {
     background: rgb(0,0,0);
     background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(95,95,105,1) 100%, rgba(0,212,255,1) 100%);
+    font-family: 'Josefin Slab', serif;
 }
 button {
     background: rgb(156,14,14);
@@ -16,7 +17,7 @@ li {
     background-color: black;
 }
 span {
-    color: rgb(0,0,0);
+    color: #f03535;
     /*color: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(95,95,105,1) 100%, rgba(0,212,255,1) 100%);*/
 }
 
@@ -39,6 +40,14 @@ span {
     background-color: transparent;
 }
 
+.navbar-brand{
+    font-size: 45px;
+    font-family: 'Bangers', cursive;
+}
+
+#add-movie-container{
+    color: white;
+}
 #form-container {
     color: white;
 }
