@@ -3,14 +3,14 @@ let main = $("#main");
 
 function domMovieBuilder(movieArr) {
     main.empty();
-    $("#main").attr("class", "container d-flex justify-content-between");
+    $("#main").attr("class", "row d-flex justify-content-between col-10");
 
     movieArr.forEach(movie => {
         main.append(`
-        <div class="card w3-animate-top" style="width: 18rem;">
+        <div class="card w3-animate-top col-lg-3 col-sm-6 col-12" style="width: 18rem;">
           <img class="card-img-top" style="max-height: 400px;" src="${movie.image || 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Triforce.svg/1024px-Triforce.svg.png'}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">${movie.title || "(Not found)"}</h5>
+            <h3 class="card-title">${movie.title || "(Not found)"}</h3>
             <p class="card-text">${movie.plot || "(Not found)"}</p>
           </div>
           <ul class="">
@@ -20,9 +20,9 @@ function domMovieBuilder(movieArr) {
             <li class="">Year: ${movie.year || "(Not found)"}</li>
             <li class="">Rating: ${movie.rating || "(Not rated)"}</li>
           </ul>
-          <div class="card-body" data-attribute="${movie.id}">
-            <button type="button" class="myButton edit-movie">Edit Movie</button>
-            <button type="button" class="myButton delete-movie">Delete</button>
+          <div class="card-body d-flex" data-attribute="${movie.id}">
+            <button type="button" class="myButton edit-movie align-self-end">Edit Movie</button>
+            <button type="button" class="myButton delete-movie align-self-end">Delete</button>
           </div>
         </div>
     `)
