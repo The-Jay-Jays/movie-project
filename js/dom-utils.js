@@ -41,8 +41,38 @@ function domMovieBuilder(movieArr) {
     $(".edit-movie").click(function () {
         let currentMovie = $(this).parent().attr("data-attribute");
         console.log(movies[currentMovie - 1]);
+        $(".remove-after-submit").remove();
         formBuilder(movies[currentMovie - 1], currentMovie);
     });
+    $(".delete-movie").click(function(){
+        let currentMovie = $(this).parent().attr("data-attribute");
+        console.log(movies)
+        console.log(movies[currentMovie - 1].title);
+        let userConfirm = confirm(`Are you sure you want to delete ${movies[currentMovie - 1].title}?`);
+        if(userConfirm){
+            fetch(`https://stupendous-extreme-slug.glitch.me/movies/${currentMovie}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                // body: JSON.stringify(movieObj)
+            }).then(res => res.json()).then(data => {
+                console.log(data);
+                initMovies = [];
+                // main.empty();
+                setTimeout(function (){
+                    movieAPICall();
+                }, 500);
+
+
+            }).catch(err => {
+                console.log(`There was an API error of the following: ${err}`);
+                alert(`Sorry, there was an error deleting movie data.  Please try again later.`)
+            });
+        }
+
+
+    })
 }
 
 
@@ -87,6 +117,8 @@ let formBuilder = (formInfo, id) => {
             </div>
             
             <button type="button" class="btn btn-primary" id="changes">Submit changes</button>
+            <button type="button" class="btn btn-primary" id="cancel">Cancel</button>
+            
         </form>
     `).insertAfter(main);
     $("#changes").click(function () {
@@ -124,6 +156,9 @@ let formBuilder = (formInfo, id) => {
             alert(`Sorry, there was an error changing movie data.  Please try again later.`)
         });
     })
+    $("#cancel").click(function(){
+        $(".remove-after-submit").remove();
+    });
 }
 
 
