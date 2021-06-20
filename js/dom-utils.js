@@ -3,11 +3,11 @@ let main = $("#main");
 
 function domMovieBuilder(movieArr) {
     main.empty();
-    $("#main").attr("class", "row d-flex justify-content-between col-10");
+    $("#main").attr("class", "row d-flex justify-content-around");
 
     movieArr.forEach(movie => {
         main.append(`
-        <div class="card w3-animate-top col-lg-3 col-sm-6 col-12" style="width: 18rem;">
+        <div class="card w3-animate-top my-2 mx-1" style="width: 18rem;">
           <img class="card-img-top" style="max-height: 400px;" src="${movie.image || 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Triforce.svg/1024px-Triforce.svg.png'}" alt="Card image cap">
           <div class="card-body">
             <h3 class="card-title">${movie.title || "(Not found)"}</h3>
@@ -21,7 +21,7 @@ function domMovieBuilder(movieArr) {
             <li class="">Rating: ${movie.rating || "(Not rated)"}</li>
           </ul>
           <div class="card-body d-flex" data-attribute="${movie.id}">
-            <button type="button" class="myButton edit-movie align-self-end">Edit Movie</button>
+            <button type="button" class="myButton edit-movie align-self-end"><a href="#form-container">Edit Movie</a></button>
             <button type="button" class="myButton delete-movie align-self-end">Delete</button>
           </div>
         </div>
@@ -82,7 +82,7 @@ console.log(movies);
 let formBuilder = (formInfo, id) => {
     let main = $("#main");
     $(`
-       <div class="container remove-after-submit" id="form-container"> 
+       <div class="container remove-after-submit mt-3" id="form-container"> 
             <h4 class="remove-after-submit">Complete change movie form</h4>
             <form class="remove-after-submit w3-animate-top">
                 <div class="form-group">

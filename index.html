@@ -6,7 +6,8 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Josefin+Slab:wght@300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Josefin+Slab:wght@300&display=swap"
+              rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
               integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
               crossorigin="anonymous">
@@ -26,36 +27,112 @@
     <body>
 
         <div class="navbar mb-4 justify-content-between">
-            <a href="#" class="navbar-brand">Jay Jay's <span>Cinema</span></a>
+            <a href="#" class="navbar-brand ml-4">Jay Jay's <span>Cinema</span></a>
+            <button type="button" class="myButton" data-toggle="modal" data-target="#ModalCenter">Add Movie</button>
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="myButton my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
-        <div class="row">
-            <div class="row d-flex justify-content-center col-10" id="main">   <!-- adjust line 6 on movie utils -->
-                <div class="loader mt-4"></div>
-            </div>
 
-            <!--        <button type="button" class="btn btn-primary" id="form-builder">Submit</button>-->
-
-            <div class="container d-flex justify-content-right col-2 align-text-left" id="add-movie-container">
-                <form>
-                    <div class="form-group">
-                        <label for="Title">Movie Title</label>
-                        <input type="text" class="form-control" id="Title" placeholder="Enter Movie Title">
-
+        <div class="modal fade" id="ModalCenter" data-backdrop="static" data-keyboard="false" tabindex="-1"
+             role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalLongTitle">Add Movie</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="Rating">Movie Rating</label>
-                        <input type="text" class="form-control" id="Rating" aria-describedby="textHelp"
-                               placeholder="Enter Movie Rating">
-                        <small id="textHelp" class="form-text text-muted">Movie Rating 1 through 5</small>
-                    </div>
-                    <button type="button" class="myButton" id="add-movie">Submit</button>
+                    <div class="modal-body">
 
-                </form>
+                        <form>
+                            <div class="form-group">
+                                <label for="Title">Movie Title</label>
+                                <input type="text" class="form-control" id="Title" placeholder="Enter Movie Title">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="Rating">Movie Rating</label>
+                                <input type="text" class="form-control" id="Rating" aria-describedby="textHelp"
+                                       placeholder="Enter Movie Rating">
+                                <small id="textHelp" class="form-text text-muted">Movie Rating 1 through 5</small>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="myButton" data-dismiss="modal">Close</button>
+                        <button type="button" class="myButton" id="add-movie" data-dismiss="modal">Add movie</button>
+                    </div>
+                </div>
             </div>
         </div>
+
+
+        <div class="d-flex justify-content-center mt-5" id="main">   <!-- adjust line 6 on movie utils -->
+            <div class="container d-flex justify-content-center align-items-center mt-4">
+                <div class="loader"></div>
+            </div>
+        </div>
+
+
+        <footer class="page-footer font-small ">
+            <div class="container d-flex justify-content-center py-3">
+                <div class="row py-3">
+                    <div class="col-12 py-5">
+                        <div class="flex-center">
+
+                            <a href="#" class="mx-2">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+
+                            <a href="#" class="mx-2">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+
+                            <a href="#" class="mx-2">
+                                <i class="bi bi-google"></i>
+                            </a>
+
+                            <a href="#" class="mx-2">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+
+                            <a href="#" class="mx-2">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+
+                            <a href="#" class="mx-2">
+                                <i class="bi bi-chat-left-dots"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a href="#" id="website"> jayjayscinema.com</a>
+            </div>
+        </footer>
+
+
+        <!--            <div class="container d-flex justify-content-right col-2 align-text-left" id="add-movie-container">-->
+        <!--                <form class="mr-auto">-->
+        <!--                    <div class="form-group">-->
+        <!--                        <label for="Title">Movie Title</label>-->
+        <!--                        <input type="text" class="form-control" id="Title" placeholder="Enter Movie Title">-->
+
+        <!--                    </div>-->
+        <!--                    <div class="form-group">-->
+        <!--                        <label for="Rating">Movie Rating</label>-->
+        <!--                        <input type="text" class="form-control" id="Rating" aria-describedby="textHelp"-->
+        <!--                               placeholder="Enter Movie Rating">-->
+        <!--                        <small id="textHelp" class="form-text text-muted">Movie Rating 1 through 5</small>-->
+        <!--                    </div>-->
+        <!--                    <button type="button" class="myButton" >Submit</button>-->
+
+        <!--                </form>-->
+        <!--            </div>-->
     </body>
 </html>
