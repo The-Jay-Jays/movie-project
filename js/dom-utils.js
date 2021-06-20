@@ -13,12 +13,12 @@ function domMovieBuilder(movieArr) {
             <h3 class="card-title">${movie.title || "(Not found)"}</h3>
             <p class="card-text">${movie.plot || "(Not found)"}</p>
           </div>
-          <ul class="">
-            <li class="">Director: ${movie.director || "(Not found)"}</li>
-            <li class="">Actors: ${movie.actors || "(Not found)"}</li>
-            <li class="">Genre: ${movie.genre || "(Not found)"}</li>
-            <li class="">Year: ${movie.year || "(Not found)"}</li>
-            <li class="">Rating: ${movie.rating || "(Not rated)"}</li>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Director: ${movie.director || "(Not found)"}</li>
+            <li class="list-group-item">Actors: ${movie.actors || "(Not found)"}</li>
+            <li class="list-group-item">Genre: ${movie.genre || "(Not found)"}</li>
+            <li class="list-group-item">Year: ${movie.year || "(Not found)"}</li>
+            <li class="list-group-item">Rating: ${movie.rating || "(Not rated)"}</li>
           </ul>
           <div class="card-body d-flex" data-attribute="${movie.id}">
             <button type="button" class="myButton edit-movie align-self-end"><a href="#form-container">Edit Movie</a></button>

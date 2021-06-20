@@ -18,7 +18,7 @@ html {
 
 }
 li {
-    background-color: black;
+    background-color: black !important;
 }
 span {
     color: #f03535;
@@ -44,6 +44,7 @@ span {
 
 .navbar {
     background-color: transparent;
+    margin-bottom: 100px !important;
 }
 
 .navbar-brand{
@@ -67,7 +68,7 @@ span {
 }
 
 
-/*CSS code for animation*/
+/* -------- CSS code for loader animation ----------*/
 .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
@@ -115,4 +116,79 @@ span {
     position:relative;
     top:1px;
 }
+
+/*--------- media queries ----------*/
+
+
+@media (min-width: 700px){
+    .navbar-brand {
+        margin-left: 25px;
+    }
+}
+
+/*-------------- glowing cards ----------------*/
+
+.card::before , .card::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    background: linear-gradient(45deg , #e80000, #7f2020, #c78989, #4c0f0f, #f03535);
+    background-size: 400%;
+    width: calc(100% + 5px);
+    height: calc(100% + 5px);
+    z-index: -1;
+    animation: animate 20s linear infinite;
+}
+@keyframes animate {
+    0%{
+        background-position: 0 0;
+    }
+    50%{
+        background-position: 400% 0;
+    }
+    100%{
+        background-position: 0 0;
+    }
+}
+.card::after {
+    filter: blur(20px);
+}
+
+
+/*span::before , span::after {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    left: -2px;*/
+/*    top: -2px;*/
+/*    background: linear-gradient(45deg , #e80000, #7f2020, #c78989, #4c0f0f, #f03535);*/
+/*    background-size: 400%;*/
+/*    width: calc(100% + 5px);*/
+/*    height: calc(100% + 5px);*/
+/*    z-index: -1;*/
+/*    animation: animate 30s linear infinite;*/
+/*}*/
+
+/*span::after {*/
+/*    filter: blur(20px);*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
