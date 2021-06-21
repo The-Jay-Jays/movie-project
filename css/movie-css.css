@@ -1,5 +1,4 @@
 
-
 a {
     color: white;
 }
@@ -155,23 +154,6 @@ span {
     filter: blur(20px);
 }
 
-
-/*span::before , span::after {*/
-/*    content: "";*/
-/*    position: absolute;*/
-/*    left: -2px;*/
-/*    top: -2px;*/
-/*    background: linear-gradient(45deg , #e80000, #7f2020, #c78989, #4c0f0f, #f03535);*/
-/*    background-size: 400%;*/
-/*    width: calc(100% + 5px);*/
-/*    height: calc(100% + 5px);*/
-/*    z-index: -1;*/
-/*    animation: animate 30s linear infinite;*/
-/*}*/
-
-/*span::after {*/
-/*    filter: blur(20px);*/
-/*}*/
 
 
 

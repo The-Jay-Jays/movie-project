@@ -90,11 +90,11 @@ let formBuilder = (formInfo, id) => {
                     <input type="text" class="form-control" id="url" value="${formInfo.image}">
                 </div>
                 <div class="form-group">
-                    <label for="Title">Title</label>
+                    <label for="title">Title</label>
                     <input type="text" class="form-control" id="title" value="${formInfo.title}">
                 </div>
                 <div class="form-group">
-                    <label for="post">Plot</label>
+                    <label for="plot">Plot</label>
                     <input type="text" class="form-control" id="plot" value="${formInfo.plot}">
                 </div>
                 <div class="form-group">
