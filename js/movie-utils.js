@@ -1,4 +1,6 @@
 let initMovies = [];
+let token = OMDB_TOKEN;
+
 let movieAPICall = () => {
     fetch("https://stupendous-extreme-slug.glitch.me/movies")
         .then(res => res.json()).then(data => {
@@ -29,51 +31,68 @@ $(document).ready(() => {
     movieAPICall();
 
     $("#add-movie").click(function () {
-        let title = $("#Title").val();
+        let title = $("#Title").val().trim();
         let rating = $("#Rating").val();
-        let addMovie = {
-            title: title,
-            rating: rating,
-            actors: "",
-            director: "",
-            genre: "",
-            plot: "",
-            image: "",
-            year: ""
-        }
-        if ($("#Title").val()) {
+        let addMovie;
+        if (title) {
             $("#add-movie").toggleClass("disabled");
-            fetch("https://stupendous-extreme-slug.glitch.me/movies",{
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(addMovie)
-            })
+            let inputTitle = title.replaceAll(" ", "+");
+
+            fetch(`http://www.omdbapi.com/?apikey=${token}&t=${inputTitle}&r=json`)
                 .then(res => res.json()).then(data => {
                 console.log(data);
-                initMovies = [];
-                setTimeout(function (){
-                    movieAPICall();
-                    $("#add-movie").toggleClass("disabled");
-                }, 1000);
+                if (data.Response === "False") {
+                    return alert("Could not find a movie by this title");
+                }
+                addMovie = {
+                    title: data.Title,
+                    rating: rating,
+                    actors: data.Actors,
+                    director: data.Director,
+                    genre: data.Genre,
+                    plot: data.Plot,
+                    poster: data.Poster,
+                    year: data.Year
+                }
 
+                fetch("https://stupendous-extreme-slug.glitch.me/movies",{
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(addMovie)
+                })
+                    .then(res => res.json()).then(data => {
+                    console.log(data);
+                    initMovies = [];
+                    setTimeout(function (){
+                        movieAPICall();
+                        $("#add-movie").toggleClass("disabled");
+                    }, 1000);
+
+
+                }).catch(err => {
+                    console.log(`There was an API error of the following: ${err}`);
+                    alert(`Sorry, there was an error adding the movie ${title}.  Please try again later.`)
+                });
 
             }).catch(err => {
                 console.log(`There was an API error of the following: ${err}`);
-                alert(`Sorry, there was an error adding movie data.  Please try again later.`)
+                alert(`Sorry, there was an error finding the movie '${title}'.  Please check your spelling/selection and try again.`);
             });
+
+
         } else {
             alert("The title field is empty.  Please enter a title to create a movie");
         }
 
     });
 
-    console.log(initMovies);
-    initMovies.sort((curr, next) => {
-        return curr.title > next.title ? 1 : -1
-    })
-    console.log(initMovies);
+    // console.log(initMovies);
+    // initMovies.sort((curr, next) => {
+    //     return curr.title > next.title ? 1 : -1
+    // })
+    // console.log(initMovies);
 
 });
 
