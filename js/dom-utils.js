@@ -2,6 +2,7 @@ let movies = [];
 let main = $("#main");
 
 function domMovieBuilder(movieArr) {
+    movies = [];
     main.empty();
     $("#main").attr("class", "row d-flex justify-content-around");
 
@@ -26,7 +27,6 @@ function domMovieBuilder(movieArr) {
           </div>
         </div>
     `)
-        // movies = [];
         movies.push({
             id: movie.id,
             image: movie.image,
@@ -42,16 +42,19 @@ function domMovieBuilder(movieArr) {
 
     $(".edit-movie").click(function () {
         let currentMovie = $(this).parent().attr("data-attribute");
-        // console.log(movies[currentMovie - 1]);
         $(".remove-after-submit").remove();
-        formBuilder(movies[currentMovie - 1], currentMovie);
+        console.log(movies);
+        let movieId = movies.find(function (movie) {
+            return movie.id == currentMovie
+        });
+        formBuilder(movieId, currentMovie);
     });
-    $(".delete-movie").click(function(){
-        let currentMovie = $(this).parent().attr("data-attribute");
-        // console.log(movies)
-        // console.log(movies[currentMovie - 1].title);
-        let userConfirm = confirm(`Are you sure you want to delete ${movies[currentMovie - 1].title}?`);
-        if(userConfirm){
+    $(".delete-movie").click(function () {
+        let currentMovie = parseInt($(this).parent().attr("data-attribute"));
+        let userConfirm = confirm(`Are you sure you want to delete ${movies.find(function (movie) {
+            return movie.id == currentMovie
+        }).title}?`);
+        if (userConfirm) {
             fetch(`https://stupendous-extreme-slug.glitch.me/movies/${currentMovie}`, {
                 method: "DELETE",
                 headers: {
@@ -59,10 +62,10 @@ function domMovieBuilder(movieArr) {
                 },
                 // body: JSON.stringify(movieObj)
             }).then(res => res.json()).then(data => {
-                console.log(data);
+                // console.log(data);
                 initMovies = [];
                 // main.empty();
-                setTimeout(function (){
+                setTimeout(function () {
                     movieAPICall();
                 }, 500);
 
@@ -77,9 +80,10 @@ function domMovieBuilder(movieArr) {
 }
 
 
-console.log(movies);
+// console.log(movies);
 
 let formBuilder = (formInfo, id) => {
+    console.log(formInfo);
     let main = $("#main");
     $(`
        <div class="container remove-after-submit mt-3" id="form-container"> 
@@ -136,7 +140,7 @@ let formBuilder = (formInfo, id) => {
             year: $("#year").val() || $("#year").attr("value")
         };
         // console.log(movieObj);
-        console.log(movieObj);
+        // console.log(movieObj);
         fetch(`https://stupendous-extreme-slug.glitch.me/movies/${id}`, {
             method: "PUT",
             headers: {
@@ -148,7 +152,7 @@ let formBuilder = (formInfo, id) => {
             $(".remove-after-submit").remove();
             initMovies = [];
             // main.empty();
-            setTimeout(function (){
+            setTimeout(function () {
                 movieAPICall();
             }, 1000);
 
@@ -158,7 +162,7 @@ let formBuilder = (formInfo, id) => {
             alert(`Sorry, there was an error changing movie data.  Please try again later.`)
         });
     })
-    $("#cancel").click(function(){
+    $("#cancel").click(function () {
         $(".remove-after-submit").remove();
     });
 }

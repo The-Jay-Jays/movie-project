@@ -34,6 +34,7 @@ $(document).ready(() => {
         let title = $("#Title").val().trim();
         let rating = $("#Rating").val();
         let addMovie;
+        $(".remove-after-submit").remove();
         if (title) {
             $("#add-movie").toggleClass("disabled");
             let inputTitle = title.replaceAll(" ", "+");
@@ -42,7 +43,18 @@ $(document).ready(() => {
                 .then(res => res.json()).then(data => {
                 console.log(data);
                 if (data.Response === "False") {
+                    $("#Title").val("");
+                    $("#Rating").val("");
                     return alert("Could not find a movie by this title");
+                } else if (data.Response) {
+                    let alreadyExists = initMovies.some(function(movie){
+                        return movie.title.toUpperCase() === title.toUpperCase();
+                    })
+                    if (alreadyExists) {
+                        $("#Title").val("");
+                        $("#Rating").val("");
+                        return alert("This movie is already included");
+                    }
                 }
                 addMovie = {
                     title: data.Title,
@@ -54,6 +66,8 @@ $(document).ready(() => {
                     poster: data.Poster,
                     year: data.Year
                 }
+                $("#Title").val("");
+                $("#Rating").val("");
 
                 fetch("https://stupendous-extreme-slug.glitch.me/movies",{
                     method: "POST",
@@ -68,7 +82,7 @@ $(document).ready(() => {
                     setTimeout(function (){
                         movieAPICall();
                         $("#add-movie").toggleClass("disabled");
-                    }, 1000);
+                    }, 500);
 
 
                 }).catch(err => {
@@ -88,17 +102,7 @@ $(document).ready(() => {
 
     });
 
-    // console.log(initMovies);
-    // initMovies.sort((curr, next) => {
-    //     return curr.title > next.title ? 1 : -1
-    // })
-    // console.log(initMovies);
-
 });
-
-
-
-
 
 
 
