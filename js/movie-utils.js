@@ -39,7 +39,7 @@ $(document).ready(() => {
             $("#add-movie").toggleClass("disabled");
             let inputTitle = title.replaceAll(" ", "+");
 
-            fetch(`http://www.omdbapi.com/?apikey=${token}&t=${inputTitle}&r=json`)
+            fetch(`https://cors-anywhere.hirshwebsite.website/http://www.omdbapi.com/?apikey=${token}&t=${inputTitle}&r=json`)
                 .then(res => res.json()).then(data => {
                 console.log(data);
                 if (data.Response === "False") {
