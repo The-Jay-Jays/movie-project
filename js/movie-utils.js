@@ -1,5 +1,6 @@
 let initMovies = [];
 let token = OMDB_TOKEN;
+const searchBox = document.getElementById("search-box");
 
 let movieAPICall = () => {
     fetch("https://stupendous-extreme-slug.glitch.me/movies")
@@ -24,6 +25,15 @@ let movieAPICall = () => {
         alert(`Sorry, there was an error retrieving movie data.  Please try again later.`)
     });
 
+}
+
+let filterMovies = () => {
+    console.log($("#search-box").val());
+    let searchedMovies = initMovies.filter(function (movie){
+        return movie.title.toLowerCase().includes($("#search-box").val().toLowerCase());
+    });
+    console.log(searchedMovies);
+    domMovieBuilder(searchedMovies);
 }
 
 $(document).ready(() => {
@@ -101,7 +111,7 @@ $(document).ready(() => {
         }
 
     });
-
+    searchBox.addEventListener("input", filterMovies);
 });
 
 
