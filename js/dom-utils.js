@@ -4,7 +4,7 @@ let main = $("#main");
 function domMovieBuilder(movieArr) {
     movies = [];
     main.empty();
-    $("#main").attr("class", "row d-flex justify-content-around");
+    $("#main").attr("class", "row d-flex justify-content-around align-content-center");
 
     movieArr.forEach(movie => {
         main.append(`

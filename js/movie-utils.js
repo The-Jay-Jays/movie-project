@@ -3,9 +3,9 @@ let token = OMDB_TOKEN;
 const searchBox = document.getElementById("search-box");
 
 let movieAPICall = () => {
-    fetch("https://stupendous-extreme-slug.glitch.me/movies")
+    fetch("http://localhost:8080/movies")
         .then(res => res.json()).then(data => {
-        // console.log(data);
+        console.log(data);
         data.forEach((movie, index) => {
             initMovies.push({
                 actors: data[index].actors,
@@ -79,7 +79,7 @@ $(document).ready(() => {
                 $("#Title").val("");
                 $("#Rating").val("");
 
-                fetch("https://stupendous-extreme-slug.glitch.me/movies",{
+                fetch("http://localhost:8080/movies",{
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json',
@@ -113,7 +113,6 @@ $(document).ready(() => {
     });
     searchBox.addEventListener("input", filterMovies);
 });
-
 
 
 
